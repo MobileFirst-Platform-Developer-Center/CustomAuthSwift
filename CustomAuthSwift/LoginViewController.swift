@@ -40,7 +40,7 @@ class LoginViewController: UIViewController {
 
     @IBAction func login(sender: AnyObject) {
         self.challengeHandler?.submitLoginForm("/my_custom_auth_request_url",
-            requestParameters: ["username" : self.username.text, "password" : self.password.text],
+            requestParameters: ["username" : self.username.text!, "password" : self.password.text!],
             requestHeaders: nil, requestTimeoutInMilliSeconds: 0, requestMethod: "POST")
     }
     

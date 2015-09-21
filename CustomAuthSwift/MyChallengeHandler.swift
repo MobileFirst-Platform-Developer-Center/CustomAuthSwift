@@ -27,9 +27,9 @@ class MyChallengeHandler: ChallengeHandler {
     
     override func isCustomResponse(response: WLResponse!) -> Bool {
         if response != nil && response.responseJSON != nil {
-            var responseJson: NSDictionary = response.responseJSON as NSDictionary
+            let responseJson: NSDictionary = response.responseJSON as NSDictionary
             if responseJson.objectForKey("authStatus") != nil{
-                var authRequired : NSString = responseJson.objectForKey("authStatus") as! NSString
+                let authRequired : NSString = responseJson.objectForKey("authStatus") as! NSString
                 return (authRequired.compare("required") == NSComparisonResult.OrderedSame)
             }
         }
@@ -38,15 +38,15 @@ class MyChallengeHandler: ChallengeHandler {
     
     override func handleChallenge(response: WLResponse!) {
         NSLog("A login form should appear")
-        if self.vc.navigationController?.visibleViewController.isKindOfClass(LoginViewController) == true {
+        if self.vc.navigationController?.visibleViewController!.isKindOfClass(LoginViewController) == true {
             dispatch_async(dispatch_get_main_queue()) {
-                var loginController : LoginViewController! = self.vc.navigationController?.visibleViewController as? LoginViewController
+                let loginController : LoginViewController! = self.vc.navigationController?.visibleViewController as? LoginViewController
                 loginController.errorMsg.hidden = false
             }
         } else {
             self.vc.performSegueWithIdentifier("showLogin", sender: self.vc)
             dispatch_async(dispatch_get_main_queue()) {
-                var loginController : LoginViewController! = self.vc.navigationController?.visibleViewController as? LoginViewController
+                let loginController : LoginViewController! = self.vc.navigationController?.visibleViewController as? LoginViewController
                 loginController.challengeHandler = self
                 loginController.errorMsg.hidden = true
             }
